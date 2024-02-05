@@ -3,19 +3,19 @@ const DOMselectors = {
     name2: document.querySelector("#Name2"),
     galleri: document.querySelector(".galleri"),
     enter: document.querySelector("#enter"),
-    form: document.querySelector(".pop")
+    form: document.querySelector(".form")
 }
 
 const Ships = [];
-form.addEventListener('submit', function (event) {
-
+DOMselectors.enter.addEventListener('click', function (event) {
+    event.preventDefault();
     const name1 = DOMselectors.name1.value
     const name2 = DOMselectors.name2.value
     const loveScore = calculateLoveScore();
     const newname = makeshipName(name1, name2);
     Ships.push({ newname, loveScore })
     console.log(name1, name2)
-
+    ello(Ships);
     function makeshipName(name1, name2) {
         let shipName = '';
         const halfName1 = name1.substring(0, Math.ceil(name1.length / 2));
@@ -32,18 +32,14 @@ form.addEventListener('submit', function (event) {
         const loveScore = Math.floor(Math.random() * 100) + 1;
         return loveScore;
     }
-    makeshipName();
-    calculateLoveScore();
-    event.preventDefault();
-    ello(Ships);
-
+    
     function ello(arr) {
         arr.forEach((ship) =>
             DOMselectors.galleri.insertAdjacentHTML(
                 "beforeend",
                 `<div class="gall">
-   <h2 class="Name">${ship.newname}</h2>
-   <h3 class="LoveScore">${ship.loveScore}</h3>
+   <h2 class="Name">Ship Name: ${ship.newname}</h2>
+   <h3 class="LoveScore">LoveScore: ${ship.loveScore}</h3>
 </div>` )
         );
 
